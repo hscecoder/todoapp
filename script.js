@@ -7,6 +7,9 @@ function addTask() {
         return;
     }
 
+    const now = new Date();
+    const timeString = now.toLocaleString();
+
     const existingTasks = document.querySelectorAll("#taskList li");
     for (let task of existingTasks) {
         const text = task.firstChild.textContent.trim().toLowerCase();
@@ -16,12 +19,13 @@ function addTask() {
         }
     }
 
-    const li = document.createElement("li");
-    li.textContent = taskText;
+    const li = document.createElement('div');
+      li.classList.add('task');
+      li.innerHTML = `
+        <span class="task-name">${taskText}</span>
+        <span class="task-time">${timeString}</span>
+      `;
 
-    li.addEventListener("click", () => {
-        li.classList.toggle("completed");
-    });
 
     const deleteBtn = document.createElement("span");
     deleteBtn.textContent = "❌";
